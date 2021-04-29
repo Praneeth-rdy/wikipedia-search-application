@@ -5,6 +5,8 @@
 let searchInputEl = document.getElementById("searchInput");
 let searchResultsEl = document.getElementById("searchResults");
 
+let spinner = document.getElementById("spinner");
+
 function createAndAppendSearchResult(result){
 
     // Create result item
@@ -59,10 +61,12 @@ function searchWikipedia(event) {
         let options = {
             method: "GET"
         };
+        spinner.classList.toggle("d-none");
         fetch(url, options).then(function (response){
             return response.json();
         }).then(function (jsonData){
             let { search_results } = jsonData;
+            spinner.classList.toggle("d-none");
             displayResults(search_results);
         });
         console.log();
